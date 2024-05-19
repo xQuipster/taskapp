@@ -51,7 +51,6 @@ public class TaskManager extends JFrame {
         TableColumn column = taskTable.getColumnModel().getColumn(1);
         column.setPreferredWidth(150);
 
-        // Context menu setup
         JPopupMenu popupMenu = new JPopupMenu();
         JPopupMenu popupMenu1 = new JPopupMenu();
         JMenuItem addTaskMenuItem = new JMenuItem("Add");
@@ -67,7 +66,6 @@ public class TaskManager extends JFrame {
         deleteTaskMenuItem.addActionListener(e -> deleteTask());
         popupMenu.add(deleteTaskMenuItem);
         taskTable.getColumnModel().getColumn(1).setCellRenderer((table, value, isSelected, hasFocus, row, column1) -> value instanceof Boolean ? new CheckBoxRenderer((Boolean) value) : value instanceof Integer ? new ProgressRenderer((int) value) : new DefaultTableCellRenderer());
-        // Mouse listener for renaming task on double-click
         taskTable.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -95,14 +93,11 @@ public class TaskManager extends JFrame {
             }
         });
 
-        // Display table
         add(scrollPane, BorderLayout.CENTER);
 
-        // Show context menu on right-click
         taskTable.setComponentPopupMenu(popupMenu);
         scrollPane.setComponentPopupMenu(popupMenu1);
 
-        // Load tasks from file on startup
         loadTasks();
     }
     private void mouseClicked(MouseEvent e){
